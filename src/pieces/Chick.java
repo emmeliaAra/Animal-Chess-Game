@@ -32,4 +32,9 @@ public class Chick extends Piece {
     {
 
     }
+
+    @Override
+    public void calculateLegalMoves() {
+
+    }
 }

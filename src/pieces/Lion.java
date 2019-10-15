@@ -15,4 +15,9 @@ public class Lion extends Piece{
     {
 
     }
+
+    @Override
+    public void calculateLegalMoves() {
+    }
+
 }

@@ -3,6 +3,8 @@ package game;
 import exceptions.AnimalChessException;
 import pieces.*;
 
+import java.util.ArrayList;
+
 public class Game {
 
     public static int HEIGHT = 4;
@@ -86,11 +88,19 @@ public class Game {
         Piece elephantP1 = new Elephant(player1,squares[3][0]);
         Piece lionP1 = new Lion(player1,squares[3][1]);
         Piece giraffeP1 = new Giraffe(player1,squares[3][2]);
-        Piece chickP1 = new Chick(player1,squares[2][2]);
-
+        Piece chickP1 = new Chick(player1,squares[2][1]);
     }
 
     public Square[][] getSquares(){
         return squares;
+    }
+
+    public static void main(String[] args) throws AnimalChessException {
+        Player p0 = new Player("Michael", 0);
+        Player p1 = new Player("Oz", 1);
+        Game myGame = new Game(p0, p1);
+
+        Elephant el = new Elephant(p0, myGame.getSquare(1, 2));
+        ArrayList<Square> s = el.getLegalMoves();
     }
 }

@@ -13,21 +13,22 @@ public abstract class Piece {
     private Square square;
     private Game game;
     protected ArrayList<Square> legalMoves;
+    protected static int instanceCounter = 0;
 
     public Piece(Player owner, Square square) throws AnimalChessException {
         this.owner = owner;
         this.square = square;
         square.placePiece(this);
         game = square.getGame();
+        legalMoves = new ArrayList<>();
     }
 
     public ArrayList<Square> getLegalMoves(){
-
-        return null;
+        calculateLegalMoves();
+        return legalMoves;
     }
 
     public  void move(Square toSquare){
-
     }
 
     public  void beCaptured(Player capturer){
@@ -52,8 +53,18 @@ public abstract class Piece {
         //TODO ADD excepiton
     }
 
+    public boolean isOccupied(Piece piece, int playerNumber) {
+
+        if(piece != null && piece.getOwner().getPlayerNumber() == playerNumber)
+            return true;
+        else
+            return false;
+    }
+
     public Game getGame(){
         return game;
     }
+
+    public abstract void calculateLegalMoves();
 
 }
