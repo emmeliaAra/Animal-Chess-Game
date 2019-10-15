@@ -1,11 +1,13 @@
 package pieces;
 
+import exceptions.AnimalChessException;
 import game.Player;
 import game.Square;
 
 public class Chick extends Piece {
 
-    public Chick(Player owner, Square square) {
+
+    public Chick(Player owner, Square square) throws AnimalChessException {
         super(owner, square);
     }
     //ADDITIONAL METHODS

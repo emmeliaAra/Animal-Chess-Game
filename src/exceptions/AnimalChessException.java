@@ -5,6 +5,7 @@ public class AnimalChessException extends Exception {
     private String message;
 
     public AnimalChessException(String message){
+        super(message);
         this.message = message;
     }
 
@@ -16,5 +17,9 @@ public class AnimalChessException extends Exception {
     public IllegalArgumentException reportInvalidSquare()
     {
         throw new IllegalArgumentException(message);
+    }
+
+    public void testena() throws AnimalChessException {
+        throw new AnimalChessException(message);
     }
 }

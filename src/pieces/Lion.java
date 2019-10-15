@@ -1,11 +1,12 @@
 package pieces;
 
+import exceptions.AnimalChessException;
 import game.Player;
 import game.Square;
 
 public class Lion extends Piece{
 
-    public Lion(Player owner, Square square) {
+    public Lion(Player owner, Square square) throws AnimalChessException {
         super(owner, square);
     }
 

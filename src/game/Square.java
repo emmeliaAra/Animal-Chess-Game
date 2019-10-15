@@ -1,44 +1,70 @@
 package game;
 
+import exceptions.AnimalChessException;
 import pieces.Piece;
 
 public class Square {
 
+    private Game game;
+    private int col = 0,row = 0;
+    private Piece piece = null;
+
     public Square(Game game, int row, int col) {
-
+        this.game = game;
+        this.row = row;
+        this.col = col;
     }
 
-    public void placePiece(Piece piece)
-    {
+    public void placePiece(Piece piece) throws AnimalChessException {
 
+        if( this.piece != null && this.piece.getOwner() == piece.getOwner()) {
+            throw new AnimalChessException("this");
+        }
+        else
+            this.piece = piece;
+        //TODO maybe check if this piece is null -> if yes throw exception
     }
 
-    public void removePiece(Piece piece)
-    {
-
+    public void removePiece() {
+        if(piece != null)
+            piece = null;
+        //TODO exception
+        //else
     }
 
     public Game getGame()
     {
-        //NEED TO CHANGE THIS
+        if(game != null)
+            return game;
+        //else TODO expectopn
         return null;
     }
 
     public Piece getPiece()
     {
-        //NEED TO CHANGE THIS
-        return null;
+        //TODO check if exception
+        if(piece == null)
+            return null;
+        else
+            return piece;
+        //TODO add test for valid piece returned.
     }
 
     public int getRow()
     {
-        //NEED TO CHANGE THIS
-        return 0;
+        //TODO test
+        if(row > 0)
+            return row;
+        else
+            return 0; ///TODO throw expection
     }
 
     public int getCol()
     {
-        //NEED TO CHANGE THIS
-        return 0;
+        //TODO test
+        if(col > 0)
+            return col;
+        else
+            return 0; ///TODO throw expection
     }
 }
