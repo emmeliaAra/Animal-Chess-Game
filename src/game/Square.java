@@ -15,13 +15,15 @@ public class Square {
         this.col = col;
     }
 
-    public void placePiece(Piece piece) throws AnimalChessException {
+    public void placePiece(Piece piece) throws AnimalChessException{
 
+        //If this square is occupied by the same player then do not allow this move.
         if( this.piece != null && this.piece.getOwner() == piece.getOwner()) {
-            throw new AnimalChessException("this");
+                throw new AnimalChessException("This is an illegal move - Square contains one of your pieces");
         }
-        else
+        else {
             this.piece = piece;
+        }
         //TODO maybe check if this piece is null -> if yes throw exception
     }
 

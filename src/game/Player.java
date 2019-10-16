@@ -20,6 +20,22 @@ public class Player {
         piecesInHand = new ArrayList<>();
     }
 
+    public void addPieceToHand(Piece piece) {
+        if(piece != null) {
+            piecesInHand.add(piece);
+            piece.getSquare().removePiece(); //TODO need to check if this piece is indeed in that square.
+        }
+        else
+            return; // TODO EXCEPTION
+    }
+
+    public void dropPiece(Piece piece, Square square) throws AnimalChessException {
+        //TODO CHECK if piece is indeed in the hand.
+        square.placePiece(piece);
+        piecesInHand.remove(piece);
+    }
+
+
     public String getName()
     {
         if(name != null)
@@ -35,19 +51,6 @@ public class Player {
 
     public ArrayList<Piece> getHand(){
         return piecesInHand;
-    }
-
-    public void addPieceToHand(Piece piece) {
-        if(piece != null && piecesInHand.size() <4) {
-            piecesInHand.add(piece);
-        }
-        else
-            return; // TODO EXCEPTION
-    }
-
-    public void dropPiece(Piece piece, Square square) throws AnimalChessException {
-        square.placePiece(piece);
-        piecesInHand.remove(piece);
     }
 
     public void winGame() {

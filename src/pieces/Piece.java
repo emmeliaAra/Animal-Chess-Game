@@ -4,7 +4,6 @@ import exceptions.AnimalChessException;
 import game.Game;
 import game.Player;
 import game.Square;
-
 import java.util.ArrayList;
 
 public abstract class Piece {
@@ -13,12 +12,12 @@ public abstract class Piece {
     private Square square;
     private Game game;
     protected ArrayList<Square> legalMoves;
-    protected static int instanceCounter = 0;
 
     public Piece(Player owner, Square square) throws AnimalChessException {
         this.owner = owner;
         this.square = square;
-        square.placePiece(this);
+        isOccupiedOnPlacement(square);
+        square.placePiece(this);   //TODO need to remove from had if this is on playerHand
         game = square.getGame();
         legalMoves = new ArrayList<>();
     }
@@ -28,7 +27,17 @@ public abstract class Piece {
         return legalMoves;
     }
 
-    public  void move(Square toSquare){
+    public  void move(Square toSquare)  {
+
+        //Remove piece from previous square
+        this.getSquare().removePiece();
+
+        //Add the piece to the new square
+        try {
+            toSquare.placePiece(this);
+        } catch (AnimalChessException e) {
+            e.printStackTrace();
+        }
     }
 
     public  void beCaptured(Player capturer){
@@ -53,12 +62,13 @@ public abstract class Piece {
         //TODO ADD excepiton
     }
 
-    public boolean isOccupied(Piece piece, int playerNumber) {
+    public boolean isOccupiedOnMovement(Piece piece, int playerNumber) {
+        return piece != null && piece.getOwner().getPlayerNumber() == playerNumber;
+    }
 
-        if(piece != null && piece.getOwner().getPlayerNumber() == playerNumber)
-            return true;
-        else
-            return false;
+    public void isOccupiedOnPlacement(Square square) throws AnimalChessException {
+        if(square.getPiece() != null)
+            throw new AnimalChessException("You cannot place this piece at that square because is occupied");
     }
 
     public Game getGame(){

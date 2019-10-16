@@ -10,7 +10,6 @@ public class Elephant extends Piece{
 
     public Elephant(Player owner, Square square)  throws AnimalChessException{
         super(owner, square);
-        instanceCounter ++;
     }
 
     public void calculateLegalMoves()
@@ -23,32 +22,26 @@ public class Elephant extends Piece{
        int currentRow = this.getSquare().getRow();
        int currentCol = this.getSquare().getCol();
 
+       //TODO if remove from hand I do not need this here
        if(getOwner().getHand().contains(this))
            for (Square[] square : getGame().getSquares())
                legalMoves.addAll(Arrays.asList(square));
        else {
-           if(currentRow + 1 < Game.HEIGHT && currentCol + 1 < Game.WIDTH) {
-               if(!isOccupied(getGame().getSquare(currentRow + 1 , currentCol + 1).getPiece(),getOwner().getPlayerNumber()))
+           if(currentRow + 1 < Game.HEIGHT && currentCol + 1 < Game.WIDTH)
+               if(!isOccupiedOnMovement(getGame().getSquare(currentRow + 1 , currentCol + 1).getPiece(),getOwner().getPlayerNumber()))
                    legalMoves.add(getGame().getSquare(currentRow + 1, currentCol + 1));
-               return;
-           }
-           if(currentRow + 1 < Game.HEIGHT && currentCol - 1 > 0) {
-               if (!isOccupied(getGame().getSquare(currentRow + 1, currentCol - 1).getPiece(), getOwner().getPlayerNumber()))
+
+           if(currentRow + 1 < Game.HEIGHT && currentCol - 1 >= 0)
+               if (!isOccupiedOnMovement(getGame().getSquare(currentRow + 1, currentCol - 1).getPiece(), getOwner().getPlayerNumber()))
                    legalMoves.add(getGame().getSquare(currentRow + 1, currentCol - 1));
-               return;
-           }
 
-           if(currentRow - 1 > 0 && currentCol + 1 < Game.WIDTH) {
-               if(!isOccupied(getGame().getSquare(currentRow - 1 , currentCol + 1).getPiece(),getOwner().getPlayerNumber()))
+           if(currentRow - 1 >= 0 && currentCol + 1 < Game.WIDTH)
+               if(!isOccupiedOnMovement(getGame().getSquare(currentRow - 1 , currentCol + 1).getPiece(),getOwner().getPlayerNumber()))
                    legalMoves.add(getGame().getSquare(currentRow - 1, currentCol + 1));
-               return;
-           }
 
-           if(currentRow - 1 > 0 && currentCol -1 > 0) {
-               if(!isOccupied(getGame().getSquare(currentRow -1 , currentCol - 1).getPiece(),getOwner().getPlayerNumber()))
+           if(currentRow - 1 >= 0 && currentCol -1 >= 0)
+               if(!isOccupiedOnMovement(getGame().getSquare(currentRow -1 , currentCol - 1).getPiece(),getOwner().getPlayerNumber()))
                    legalMoves.add(getGame().getSquare(currentRow - 1, currentCol - 1));
-               return;
-           }
        }
     }
 }

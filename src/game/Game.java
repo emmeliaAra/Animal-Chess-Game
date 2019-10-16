@@ -100,7 +100,7 @@ public class Game {
         Player p1 = new Player("Oz", 1);
         Game myGame = new Game(p0, p1);
 
-        Elephant el = new Elephant(p0, myGame.getSquare(1, 2));
-        ArrayList<Square> s = el.getLegalMoves();
+        //Elephant el = new Elephant(p0, myGame.getSquare(1, 2));
+        //ArrayList<Square> s = el.getLegalMoves();
     }
 }
