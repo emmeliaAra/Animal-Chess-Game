@@ -1,5 +1,6 @@
 package pieces;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import exceptions.AnimalChessException;
 import game.Game;
 import game.Player;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 
 public abstract class Piece {
 
-    private Player owner;
-    private Square square;
+    protected Player owner;
+    protected Square square;
     private Game game;
     protected ArrayList<Square> legalMoves;
 
@@ -23,27 +24,35 @@ public abstract class Piece {
     }
 
     public ArrayList<Square> getLegalMoves(){
+        legalMoves = new ArrayList<>();
         calculateLegalMoves();
         return legalMoves;
     }
 
     public  void move(Square toSquare)  {
-
-        //Remove piece from previous square
-        this.getSquare().removePiece();
-
-        //Add the piece to the new square
         try {
-            toSquare.placePiece(this);
+         //   if(this.getLegalMoves().contains(toSquare)) {
+                if (toSquare.getPiece() != null && toSquare.getPiece().getOwner() != this.getOwner())
+                    toSquare.getPiece().beCaptured(owner);
+
+                //Add the piece to the new square
+                toSquare.placePiece(this);
+                if(!this.getOwner().getHand().contains(this))
+                    //Remove piece from previous square
+                    this.getSquare().removePiece();
+
+                square = toSquare;
+       //     }
+
         } catch (AnimalChessException e) {
             e.printStackTrace();
         }
     }
 
     public  void beCaptured(Player capturer){
-        square = null;
         owner = capturer;
         owner.addPieceToHand(this);
+        square = null;
     }
 
     public  Square getSquare(){

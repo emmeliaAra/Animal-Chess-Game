@@ -15,6 +15,10 @@ public class Lion extends Piece{
 
     @Override
     public void beCaptured(Player capturer) {
+        owner = capturer;
+        owner.addPieceToHand(this);
+        square = null;
+        capturer.winGame();
 
     }
 
@@ -73,12 +77,6 @@ public class Lion extends Piece{
                     if (!isOccupiedOnMovement(getGame().getSquare(currentRow, currentCol - 1).getPiece(), getOwner().getPlayerNumber()))
                         legalMoves.add(getGame().getSquare(currentRow, currentCol - 1));
             }
-
-
-
         }
-
-
     }
-
 }

@@ -30,11 +30,33 @@ public class Chick extends Piece {
     @Override
     public void move(Square toSquare) {
 
+        try {
+            if (toSquare.getPiece() != null && toSquare.getPiece().getOwner() != this.getOwner())
+                toSquare.getPiece().beCaptured(this.getOwner());
+
+            //Add the piece to the new square
+            toSquare.placePiece(this);
+
+            //Remove piece from previous square. Unless the player is dropping this piece
+            if(!this.getOwner().getHand().contains(this))
+                square.removePiece();
+
+            square = toSquare;
+
+            if(toSquare.getRow() == 0)
+                promote();
+
+        } catch (AnimalChessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void beCaptured(Player capturer) {
-
+        owner = capturer;
+        owner.addPieceToHand(this);
+        square = null;
+        isPromoted = false;
     }
 
     @Override
@@ -48,14 +70,11 @@ public class Chick extends Piece {
         if(!isPromoted && currentRow + (chickDirection) >= 0 && currentRow + (chickDirection) < Game.HEIGHT) {
             if (!isOccupiedOnMovement(getGame().getSquare(currentRow + (chickDirection), currentCol).getPiece(), getOwner().getPlayerNumber()))
                 legalMoves.add(getGame().getSquare(currentRow + (chickDirection), currentCol));
-        }
-
-        else if(isPromoted) {
-            if(currentRow + 1 <Game.HEIGHT)
+        }else if(isPromoted) {
+            if(currentRow + 1 < Game.HEIGHT)
                 //move one down
                 if(!isOccupiedOnMovement(getGame().getSquare(currentRow + 1, currentCol).getPiece(),getOwner().getPlayerNumber()))
                     legalMoves.add(getGame().getSquare(currentRow + 1, currentCol));
-
 
             if(currentRow - 1 >= 0)
                 if(!isOccupiedOnMovement(getGame().getSquare(currentRow - 1,currentCol).getPiece(),getOwner().getPlayerNumber()))

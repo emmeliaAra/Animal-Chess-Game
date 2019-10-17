@@ -31,8 +31,10 @@ public class Player {
 
     public void dropPiece(Piece piece, Square square) throws AnimalChessException {
         //TODO CHECK if piece is indeed in the hand.
-        square.placePiece(piece);
+        piece.move(square);
+//        square.placePiece(piece);
         piecesInHand.remove(piece);
+
     }
 
 
