@@ -55,8 +55,6 @@ public class PieceTest {
     @Test
     public void testMove() {
         bishop.move(square2);
-        System.out.println(square2);
-        System.out.println(bishop.getSquare());
         assertEquals(bishop.getSquare(), square2);
         assertNotEquals(bishop.getSquare(), square1);
     }
@@ -72,5 +70,4 @@ public class PieceTest {
         assertEquals(rook.getOwner(), michael);
         assertNotEquals(rook.getOwner(), oz);
     }
-
 }

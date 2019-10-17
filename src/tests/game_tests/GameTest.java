@@ -1,10 +1,8 @@
 package tests.game_tests;
 
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import game.*;
 import pieces.*;
 import exceptions.*;

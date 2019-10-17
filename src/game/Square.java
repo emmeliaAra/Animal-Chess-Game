@@ -3,70 +3,75 @@ package game;
 import exceptions.AnimalChessException;
 import pieces.Piece;
 
+/**
+ * This class represents a square that the pieces in the AnimalChess game are placed
+ */
 public class Square {
-
-    private Game game;
-    private int col = 0,row = 0;
     private Piece piece = null;
+    private int col,row;
+    private Game game;
 
+    /**
+     * Constructor of the Square class
+     * @param game the game that this square belongs to
+     * @param row the row that this square is on
+     * @param col the column that this square is on
+     */
     public Square(Game game, int row, int col) {
         this.game = game;
         this.row = row;
         this.col = col;
     }
 
+    /**
+     * This method places a piece into this square if not already occupied by the same player
+     * @param piece the piece to place to the square
+     * @throws AnimalChessException if the square is occupied by another piece of the same player
+     */
     public void placePiece(Piece piece) throws AnimalChessException{
-
         //If this square is occupied by the same player then do not allow this move.
-        if( this.piece != null && this.piece.getOwner() == piece.getOwner()) {
+        if( this.piece != null && this.piece.getOwner() == piece.getOwner())
                 throw new AnimalChessException("This is an illegal move - Square contains one of your pieces");
-        }
-        else {
+        else
             this.piece = piece;
-        }
-        //TODO maybe check if this piece is null -> if yes throw exception
     }
 
+    /**
+     * This method removes the piece from the square
+     */
     public void removePiece() {
-        if(piece != null)
             piece = null;
-        //TODO exception
-        //else
     }
 
-    public Game getGame()
-    {
-        if(game != null)
-            return game;
-        //else TODO expectopn
-        return null;
+    /**
+     * Accessor for the game instance
+     * @return the game instance that this square belongs to
+     */
+    public Game getGame() {
+        return game;
     }
 
-    public Piece getPiece()
-    {
-        //TODO check if exception
-        if(piece == null)
-            return null;
-        else
-            return piece;
-        //TODO add test for valid piece returned.
+    /**
+     * Accessor for the piece placed on the square
+     * @return the piece
+     */
+    public Piece getPiece() {
+        return piece;
     }
 
-    public int getRow()
-    {
-        //TODO test
-        if(row > 0)
-            return row;
-        else
-            return 0; ///TODO throw expection
+    /**
+     * Accessor for the row variable
+     * @return the number of the row
+     */
+    public int getRow() {
+        return row;
     }
 
-    public int getCol()
-    {
-        //TODO test
-        if(col > 0)
-            return col;
-        else
-            return 0; ///TODO throw expection
+    /**
+     * Accessor for the column variable
+     * @return the number of the column
+     */
+    public int getCol() {
+        return col;
     }
 }
