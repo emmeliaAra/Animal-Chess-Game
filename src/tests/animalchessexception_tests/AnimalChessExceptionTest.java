@@ -2,10 +2,9 @@ package tests.animalchessexception_tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import exceptions.AnimalChessException;
 import org.junit.Test;
 
-import exceptions.*;
 
 public class AnimalChessExceptionTest {
 
@@ -22,32 +21,6 @@ public class AnimalChessExceptionTest {
         } catch (AnimalChessException e) {
             assertNotNull(e);
             assertEquals(e.getMessage(), "hello world!");
-        }
-    }
-
-    @Test
-    public void TestReportInvalidPlayerError() {
-        try {
-            AnimalChessException animalChessException = new AnimalChessException("Oups");
-            animalChessException.reportInvalidPlayerError();
-            fail("this should throw an exception");
-        }catch (IllegalArgumentException exception)
-        {
-            assertNotNull(exception);
-            assertEquals(exception.getMessage(),"Oups");
-        }
-    }
-
-    @Test
-    public void TestReportInvalidSquare() {
-        try {
-            AnimalChessException animalChessException = new AnimalChessException("Oups");
-            animalChessException.reportInvalidSquare();
-            fail("this should throw an exception");
-        }catch (IllegalArgumentException exception)
-        {
-            assertNotNull(exception);
-            assertEquals(exception.getMessage(),"Oups");
         }
     }
 }

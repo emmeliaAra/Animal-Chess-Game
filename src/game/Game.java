@@ -11,9 +11,12 @@ import pieces.Piece;
  * This class represents the AnimalChess Game.
  */
 public class Game {
-
-    public static int HEIGHT = 4;
-    public static int WIDTH = 3;
+    /**
+     * {@value HEIGHT} the number of lines in the board.
+     * {@value WIDTH} the number of rows in the board.
+     */
+    public static final int HEIGHT = 4;
+    public static final int WIDTH = 3;
     private Player player1, player0, winner;
     private Square[][] board;
 

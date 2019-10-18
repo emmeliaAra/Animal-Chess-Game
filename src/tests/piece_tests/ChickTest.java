@@ -1,13 +1,19 @@
 package tests.piece_tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import game.Square;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.*;
-import game.*;
-import pieces.*;
+import exceptions.AnimalChessException;
+import game.Player;
+import game.Game;
+import pieces.Chick;
+import pieces.Piece;
 
 import java.util.ArrayList;
 
@@ -16,7 +22,7 @@ public class ChickTest {
     private Player p0;
     private Player p1;
     private Game game;
-    
+
     @Before
     public void setup() {
         p0 = new Player("Michael", 0);

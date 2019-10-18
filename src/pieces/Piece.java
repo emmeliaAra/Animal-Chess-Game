@@ -97,11 +97,13 @@ public abstract class Piece {
         return owner;
     }
 
+
     /**
      * This method is called when a piece is dropped from the player's hand to the board.
      * @param square the square to drop the piece on
+     * @throws AnimalChessException if a piece cannot be placed
      */
-    public void drop(Square square) throws AnimalChessException{
+    public void drop(Square square) throws AnimalChessException {
         //No need to check if square is empty because is checked in Player.dropPiece method
         square.placePiece(this);
         this.square = square;

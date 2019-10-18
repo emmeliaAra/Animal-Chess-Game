@@ -1,14 +1,23 @@
 package tests.square_tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
+import game.Player;
+import game.Square;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.*;
-import game.*;
-import pieces.*;
+import exceptions.AnimalChessException;
+import pieces.Elephant;
+import pieces.Giraffe;
+import pieces.Piece;
 
+/**
+ * This class contains tests that will tests the functionality of square class.
+ */
 public class SquareTest {
 
     private Square square;
@@ -40,6 +49,7 @@ public class SquareTest {
         assertEquals(square.getRow(), 1);
     }
 
+
     @Test
     public void testGetCol() {
         assertEquals(square.getCol(), 2);
@@ -50,10 +60,12 @@ public class SquareTest {
         assertNull(square.getGame());  // this one was created with a null game
     }
 
+
     @Test
     public void testGetPiece() {
         assertEquals(square.getPiece(), bishop);
     }
+
 
     @Test(expected = AnimalChessException.class)
     public void testPlacePieceFail() throws AnimalChessException {
@@ -61,11 +73,13 @@ public class SquareTest {
         fail("the last line should have thrown an exception");
     }
 
+
     @Test
     public void testRemovePiece() {
         square.removePiece();
         assertNull(square.getPiece());
     }
+
 
     @Test
     public void testPlacePieceSuccess() {
