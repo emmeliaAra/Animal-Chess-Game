@@ -1,11 +1,14 @@
 package game;
 
 import exceptions.AnimalChessException;
-import pieces.*;
+import pieces.Elephant;
+import pieces.Giraffe;
+import pieces.Chick;
+import pieces.Lion;
+import pieces.Piece;
 
 /**
- * This class represents the AnimalChess Game
- *
+ * This class represents the AnimalChess Game.
  */
 public class Game {
 
@@ -17,7 +20,7 @@ public class Game {
     /**
      * Constructor of the Game class that starts the game.
      * @param p0 Player 0
-     * @param p1 Pkayer 1
+     * @param p1 Player 1
      */
     public Game(Player p0, Player p1) {
         player0 = p0;
@@ -27,17 +30,17 @@ public class Game {
     }
 
     /**
-     * This method will return the player with that playerNumber
+     * This method will return the player with that playerNumber.
      * @param playerNumber the number of the player to return
      * @return a player instance
      */
     public Player getPlayer(int playerNumber) {
         //Will return a player or throw an exception if the playerNumber does not belong to any of the players
-        if(player0.getPlayerNumber() == playerNumber)
+        if (player0.getPlayerNumber() == playerNumber) {
             return player0;
-        else if(player1.getPlayerNumber() == playerNumber)
+        } else if (player1.getPlayerNumber() == playerNumber) {
             return player1;
-        else {
+        } else {
             AnimalChessException animalChessException = new AnimalChessException("There is no player with this ID");
             animalChessException.reportInvalidPlayerError();
         }
@@ -45,18 +48,18 @@ public class Game {
     }
 
     /**
-     * This method will set the winner for this game if there is one and return it
+     * This method will set the winner for this game if there is one and return it.
      * @return a player instance
      */
     public Player getWinner() {
 
         //Will return null if the winner is not yet defined
-        if(winner == null && !player0.hasWon() && !player1.hasWon())
+        if (winner == null && !player0.hasWon() && !player1.hasWon()) {
             return null;
-        else if(player0.hasWon()){
+        } else if (player0.hasWon()) {
             winner = player0;
             return winner;
-        }else if(player1.hasWon()) {
+        } else if (player1.hasWon()) {
             winner = player1;
             return winner;
         }
@@ -64,16 +67,15 @@ public class Game {
     }
 
     /**
-     * This method returns a square coordinates
+     * This method returns a square coordinates.
      * @param row the row of the square
      * @param col the column of the square
      * @return a square istance
      */
     public Square getSquare(int row, int col) {
-        try{
+        try {
             return board[row][col];
-        }catch (Exception exception)
-        {
+        } catch (Exception exception) {
             //If there is no such element defined it will throw an exception
             AnimalChessException animalChessException = new AnimalChessException("There is no square with these coordinates");
             animalChessException.reportInvalidSquare();
@@ -82,10 +84,10 @@ public class Game {
     }
 
     /**
-     * This method will call the methods to create the board
+     * This method will call the methods to create the board.
      * and place the pieces to their starting positions
      */
-    public void startGame(){
+    public void startGame() {
         try {
             createBoard();
             setPiecesToStartingPositions();
@@ -95,39 +97,39 @@ public class Game {
     }
 
     /**
-     * This method initialize the array that represents the board
+     * This method initialize the array that represents the board.
      */
     public void createBoard() {
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
-                board[i][j] = new Square(this,i,j);
+                board[i][j] = new Square(this, i, j);
             }
         }
     }
 
     /**
-     * This method places the pieces into their initial places
+     * This method places the pieces into their initial places.
      * @throws AnimalChessException when the piece is placed on an occupied square
      */
     public void setPiecesToStartingPositions() throws AnimalChessException {
         //ADD Player's 0 pieces
-        Piece giraffeP0 = new Giraffe(player0,board[0][0]);
-        Piece lionP0 = new Lion(player0,board[0][1]);
+        Piece giraffeP0 = new Giraffe(player0, board[0][0]);
+        Piece lionP0 = new Lion(player0, board[0][1]);
         Piece elephantP0 = new Elephant(player0, board[0][2]);
-        Piece chickP0 = new Chick(player0,board[1][1]);
+        Piece chickP0 = new Chick(player0, board[1][1]);
 
         //ADD player's 1 pieces
-        Piece elephantP1 = new Elephant(player1,board[3][0]);
-        Piece lionP1 = new Lion(player1,board[3][1]);
-        Piece giraffeP1 = new Giraffe(player1,board[3][2]);
-        Piece chickP1 = new Chick(player1,board[2][1]);
+        Piece elephantP1 = new Elephant(player1, board[3][0]);
+        Piece lionP1 = new Lion(player1, board[3][1]);
+        Piece giraffeP1 = new Giraffe(player1, board[3][2]);
+        Piece chickP1 = new Chick(player1, board[2][1]);
     }
 
     /**
-     * Accessor for board array
+     * Accessor for board array.
      * @return an instance of the board
      */
-    public Square[][] getBoard(){
+    public Square[][] getBoard() {
         return board;
     }
 }

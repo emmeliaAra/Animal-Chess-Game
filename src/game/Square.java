@@ -4,15 +4,15 @@ import exceptions.AnimalChessException;
 import pieces.Piece;
 
 /**
- * This class represents a square that the pieces in the AnimalChess game are placed
+ * This class represents a square that the pieces in the AnimalChess game are placed.
  */
 public class Square {
     private Piece piece = null;
-    private int col,row;
+    private int col, row;
     private Game game;
 
     /**
-     * Constructor of the Square class
+     * Constructor of the Square class.
      * @param game the game that this square belongs to
      * @param row the row that this square is on
      * @param col the column that this square is on
@@ -24,27 +24,29 @@ public class Square {
     }
 
     /**
-     * This method places a piece into this square if not already occupied by the same player
+     * This method places a piece into this square if not already occupied by the same player.
      * @param piece the piece to place to the square
      * @throws AnimalChessException if the square is occupied by another piece of the same player
      */
-    public void placePiece(Piece piece) throws AnimalChessException{
+    public void placePiece(Piece piece) throws AnimalChessException {
         //If this square is occupied by the same player then do not allow this move.
-        if( this.piece != null && this.piece.getOwner() == piece.getOwner())
-                throw new AnimalChessException("This is an illegal move - Square contains one of your pieces");
-        else
+        if (this.piece != null && this.piece.getOwner() == piece.getOwner()) {
+            throw new AnimalChessException("This is an illegal move - Square contains one of your pieces");
+        }
+        else {
             this.piece = piece;
+        }
     }
 
     /**
-     * This method removes the piece from the square
+     * This method removes the piece from the square.
      */
     public void removePiece() {
             piece = null;
     }
 
     /**
-     * Accessor for the game instance
+     * Accessor for the game instance.
      * @return the game instance that this square belongs to
      */
     public Game getGame() {
@@ -52,7 +54,7 @@ public class Square {
     }
 
     /**
-     * Accessor for the piece placed on the square
+     * Accessor for the piece placed on the square.
      * @return the piece
      */
     public Piece getPiece() {
@@ -60,7 +62,7 @@ public class Square {
     }
 
     /**
-     * Accessor for the row variable
+     * Accessor for the row variable.
      * @return the number of the row
      */
     public int getRow() {
@@ -68,7 +70,7 @@ public class Square {
     }
 
     /**
-     * Accessor for the column variable
+     * Accessor for the column variable.
      * @return the number of the column
      */
     public int getCol() {

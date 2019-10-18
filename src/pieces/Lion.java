@@ -5,12 +5,12 @@ import game.Player;
 import game.Square;
 
 /**
- * This class represents a piece named Giraffe and inherits from Piece class
+ * This class represents a piece named Giraffe and inherits from Piece class.
  */
-public class Lion extends Piece{
+public class Lion extends Piece {
 
     /**
-     * Constructor of Lion class that will call Piece constructor
+     * Constructor of Lion class that will call Piece constructor.
      * @param owner of the piece
      * @param square that the piece is placed on
      * @throws AnimalChessException if the piece is placed on an occupied square upon initialisation
@@ -21,7 +21,7 @@ public class Lion extends Piece{
 
     /**
      * This method overrides the method from Pieces.
-     * Is called when a Lion is capture to indicate that the capturer is the winner of the game
+     * Is called when a Lion is capture to indicate that the capturer is the winner of the game.
      * @param capturer the player that captures the piece / The winner of the game
      */
     @Override
@@ -43,6 +43,6 @@ public class Lion extends Piece{
         int currentRow = this.getSquare().getRow();
         int currentCol = this.getSquare().getCol();
         checkDiagonalMoves(currentRow, currentCol);
-        checkOrthogonalMoves(currentRow,currentCol);
+        checkOrthogonalMoves(currentRow, currentCol);
     }
 }

@@ -5,12 +5,12 @@ import game.Player;
 import game.Square;
 
 /**
- * This class represents a piece named Giraffe and inherits from Piece class
+ * This class represents a piece named Giraffe and inherits from Piece class.
  */
 public class Giraffe extends Piece {
 
     /**
-     * Constructor of Giraffe class that will call Piece constructor
+     * Constructor of Giraffe class that will call Piece constructor.
      * @param owner of the piece
      * @param square that the piece is placed on
      * @throws AnimalChessException if the piece is placed on an occupied square upon initialisation
@@ -27,6 +27,6 @@ public class Giraffe extends Piece {
         //Gets the row and column and call the checkOrthogonalMoves method to find what are the piece's legal movements.
         int currentRow = this.getSquare().getRow();
         int currentCol = this.getSquare().getCol();
-        checkOrthogonalMoves(currentRow,currentCol);
+        checkOrthogonalMoves(currentRow, currentCol);
     }
 }
