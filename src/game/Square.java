@@ -42,7 +42,7 @@ public class Square {
      * This method removes the piece from the square.
      */
     public void removePiece() {
-            piece = null;
+        piece = null;
     }
 
     /**

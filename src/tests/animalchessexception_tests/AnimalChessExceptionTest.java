@@ -13,6 +13,7 @@ public class AnimalChessExceptionTest {
         throw new AnimalChessException("hello world!");
     }
 
+
     @Test
     public void testMessage() {
         try {
@@ -23,5 +24,30 @@ public class AnimalChessExceptionTest {
             assertEquals(e.getMessage(), "hello world!");
         }
     }
-    
+
+    @Test
+    public void TestReportInvalidPlayerError() {
+        try {
+            AnimalChessException animalChessException = new AnimalChessException("Oups");
+            animalChessException.reportInvalidPlayerError();
+            fail("this should throw an exception");
+        }catch (IllegalArgumentException exception)
+        {
+            assertNotNull(exception);
+            assertEquals(exception.getMessage(),"Oups");
+        }
+    }
+
+    @Test
+    public void TestReportInvalidSquare() {
+        try {
+            AnimalChessException animalChessException = new AnimalChessException("Oups");
+            animalChessException.reportInvalidSquare();
+            fail("this should throw an exception");
+        }catch (IllegalArgumentException exception)
+        {
+            assertNotNull(exception);
+            assertEquals(exception.getMessage(),"Oups");
+        }
+    }
 }

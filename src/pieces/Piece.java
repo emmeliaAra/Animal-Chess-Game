@@ -16,6 +16,7 @@ public abstract class Piece {
     protected Player owner;
     protected Square square;
     private Game game;
+    private Square toSquare;
 
     /**
      * Constructor of the Piece class.
@@ -51,17 +52,19 @@ public abstract class Piece {
      */
     public void move(Square toSquare) {
         try {
+            //If the game is null or the toSquare is in the legalMoves of the piece then move the piece
+            if (getGame() == null || this.getLegalMoves().contains(toSquare)) {
+
             /*if the square is not null and the piece on top does not belong to the owner of this piece
               the piece on toSquare is occupied*/
-            if (toSquare.getPiece() != null && toSquare.getPiece().owner != this.owner) {
-                toSquare.getPiece().beCaptured(owner);
+                if (toSquare.getPiece() != null && toSquare.getPiece().owner != this.owner) {
+                    toSquare.getPiece().beCaptured(owner);
+                }
+                //Add the piece to the new square and remove it from the previous one
+                toSquare.placePiece(this);
+                this.getSquare().removePiece();
+                square = toSquare;
             }
-
-            //Add the piece to the new square and remove it from the previous one
-            toSquare.placePiece(this);
-            this.getSquare().removePiece();
-            square = toSquare;
-
         } catch (AnimalChessException e) {
             e.getMessage();
         }
@@ -72,6 +75,7 @@ public abstract class Piece {
      * @param capturer the player that captures the piece
      */
     public void beCaptured(Player capturer) {
+        //I don't need to check if the capturer is the piece owner because is validated in the move method.
         owner = capturer;
         owner.addPieceToHand(this);
         square = null;
@@ -97,18 +101,10 @@ public abstract class Piece {
      * This method is called when a piece is dropped from the player's hand to the board.
      * @param square the square to drop the piece on
      */
-    public void drop(Square square) {
-        try {
-            //Check if square is empty
-            if (square.getPiece() == null) {
-                square.placePiece(this);
-                this.square = square;
-            } else {
-                throw new AnimalChessException("This square is occupied. You cannot drop a piece there");
-            }
-        } catch (AnimalChessException e) {
-            e.getMessage();
-        }
+    public void drop(Square square) throws AnimalChessException{
+        //No need to check if square is empty because is checked in Player.dropPiece method
+        square.placePiece(this);
+        this.square = square;
     }
 
     /**
@@ -176,7 +172,7 @@ public abstract class Piece {
     }
 
     /**
-     * This method checks if a piece is occupied when another piece tries to move on to it.
+     * This method checks if a square is occupied when another piece tries to move on to it.
      * @param piece the piece variable of the square to check
      * @param playerNumber the player number of the player that owns the pieces
      * @return true if the piece is not null (empty) and the piece on top is owned by the same player as the piece that will be moved on the square.

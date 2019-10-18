@@ -70,7 +70,7 @@ public class Game {
      * This method returns a square coordinates.
      * @param row the row of the square
      * @param col the column of the square
-     * @return a square istance
+     * @return a square instance
      */
     public Square getSquare(int row, int col) {
         try {

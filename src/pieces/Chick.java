@@ -51,18 +51,23 @@ public class Chick extends Piece {
     public void move(Square toSquare) {
 
         try {
-            if (toSquare.getPiece() != null && toSquare.getPiece().owner != owner) {
-                toSquare.getPiece().beCaptured(this.getOwner());
-            }
 
-            //Add the piece to the new square and remove it from the previous
-            toSquare.placePiece(this);
-            square.removePiece();
-            square = toSquare;
-            //Check if the chick is in front of the opponent player
-            if (owner.getPlayerNumber() == POSITIVE_DIRECTION_PLAYER_NUMBER && toSquare.getRow() == Game.HEIGHT - 1
-                    || owner.getPlayerNumber() == NEGATIVE_DIRECTION_PLAYER_NUMBER && toSquare.getRow() == 0) {
-                promote();
+            //If the game is null or the toSquare is in the legalMoves of the piece then move the piece
+            if (toSquare.getGame() == null || this.getLegalMoves().contains(toSquare)) {
+
+                if (toSquare.getPiece() != null && toSquare.getPiece().owner != owner) {
+                    toSquare.getPiece().beCaptured(this.getOwner());
+                }
+
+                //Add the piece to the new square and remove it from the previous
+                toSquare.placePiece(this);
+                square.removePiece();
+                square = toSquare;
+                //Check if the chick is in front of the opponent player
+                if (owner.getPlayerNumber() == POSITIVE_DIRECTION_PLAYER_NUMBER && toSquare.getRow() == Game.HEIGHT - 1
+                        || owner.getPlayerNumber() == NEGATIVE_DIRECTION_PLAYER_NUMBER && toSquare.getRow() == 0) {
+                    promote();
+                }
             }
         } catch (AnimalChessException e) {
             e.printStackTrace();

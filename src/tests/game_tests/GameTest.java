@@ -62,6 +62,14 @@ public class GameTest {
         assertNotNull(p0Lion);
     }
 
+    //ADDITIONAL TEST TO TEST INVALID SQUARE REQUEST
+    @Test(expected = IllegalArgumentException.class )
+    public void testGetInvalidSquare()
+    {
+        myGame.getSquare(4,4);
+        fail("This should throw an exception");
+    }
+
     @Test
     public void fullGame() throws AnimalChessException {
         // P0 moves first - chick moves to (2,1) (takes P1's chick)

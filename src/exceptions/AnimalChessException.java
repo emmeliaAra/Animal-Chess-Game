@@ -29,4 +29,6 @@ public class AnimalChessException extends Exception {
     public void reportInvalidSquare() {
         throw new IllegalArgumentException(message);
     }
+
+
 }

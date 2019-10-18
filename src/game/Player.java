@@ -66,11 +66,11 @@ public class Player {
      * @throws AnimalChessException if the piece is not in the player's hand
      */
     public void dropPiece(Piece piece, Square square) throws AnimalChessException {
-        if (piecesInHand.contains(piece)) {
+        if (piecesInHand.contains(piece) && square.getPiece() == null) {
             piece.drop(square);
             piecesInHand.remove(piece);
         } else {
-            throw new AnimalChessException("This play does not have this piece in hand");
+            throw new AnimalChessException("This play does not have this piece in hand or the square is occupied");
         }
     }
 
